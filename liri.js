@@ -29,7 +29,7 @@ var getArtistNames = function(artist) {
 
 var getMeSpotify = function(songName) {
   if (songName === undefined) {
-    songName = "What's my age again";
+    songName = "What's my age";
   }
 
   spotify.search({ type: "track", query: songName }, function(err, data) {
@@ -54,6 +54,7 @@ var getMeSpotify = function(songName) {
     writeToLog(data);
   });
 };
+
 
 var getMyBands = function(artist) {
   var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
