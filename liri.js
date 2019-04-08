@@ -1,48 +1,32 @@
-// DEPENDENCIES
-// =====================================
 
-// Read and set environment variables
 require("dotenv").config();
-
-// Import the API keys
 var keys = require("./keys");
 
-// Import the node-spotify-api NPM package.
 var Spotify = require("node-spotify-api");
-
-// Import the axios npm package.
 var axios = require("axios");
-
-// Import the moment npm package.
 var moment = require("moment");
-
-// Import the FS package for read/write.
 var fs = require("fs");
-
-// Initialize the spotify API client using our client id and secret
 var spotify = new Spotify(keys.spotify);
 
-// FUNCTIONS
-// =====================================
 
-// Writes to the log.txt file
+
 var writeToLog = function(data) {
-  // Append the JSON data and add a newline character to the end of the log.txt file
   fs.appendFile("log.txt", JSON.stringify(data) + "\n", function(err) {
     if (err) {
       return console.log(err);
     }
 
-    console.log("log.txt was updated!");
+          console.log("updated!");
   });
 };
 
-// Helper function that gets the artist name
+
+
+
 var getArtistNames = function(artist) {
   return artist.name;
 };
 
-// Function for running a Spotify search
 var getMeSpotify = function(songName) {
   if (songName === undefined) {
     songName = "What's my age again";
@@ -60,9 +44,9 @@ var getMeSpotify = function(songName) {
     for (var i = 0; i < songs.length; i++) {
       data.push({
         "artist(s)": songs[i].artists.map(getArtistNames),
-        "song name: ": songs[i].name,
+              "song name: ": songs[i].name,
         "preview song: ": songs[i].preview_url,
-        "album: ": songs[i].album.name
+                "album: ": songs[i].album.name
       });
     }
 
@@ -71,7 +55,6 @@ var getMeSpotify = function(songName) {
   });
 };
 
-// Function for concert search
 var getMyBands = function(artist) {
   var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
 
@@ -90,10 +73,6 @@ var getMyBands = function(artist) {
 
       for (var i = 0; i < jsonData.length; i++) {
         var show = jsonData[i];
-
-        // Push each line of concert data to `logData`
-        // If a concert doesn't have a region, display the country instead
-        // Use moment to format the date
         logData.push(
           show.venue.city +
             "," +
@@ -112,7 +91,6 @@ var getMyBands = function(artist) {
   );
 };
 
-// Function for running a Movie Search
 var getMeMovie = function(movieName) {
   if (movieName === undefined) {
     movieName = "Mr Nobody";
