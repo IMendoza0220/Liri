@@ -7,11 +7,11 @@ var axios = require("axios");
 var moment = require("moment");
 var fs = require("fs");
 var spotify = new Spotify(keys.spotify);
-
+var logData = [];
 
 
 var writeToLog = function(data) {
-  fs.appendFile("log.txt", JSON.stringify(data) + "\n", function(err) {
+        fs.appendFile("log.txt", JSON.stringify(data) + "\n", function(err) {
     if (err) {
       return console.log(err);
     }
@@ -67,8 +67,6 @@ var getMyBands = function(artist) {
         console.log("No results found for " + artist);
         return;
       }
-
-      var logData = [];
 
       logData.push("Upcoming concerts for " + artist + ":");
 
